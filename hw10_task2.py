@@ -9,7 +9,7 @@ class Chessman:
         return self.color
 
     def _inside_the_chessboard(self, x:int,y:int):# перевіряє чи клітина в межах дошки
-        if not (0 <= (x and y) < 8):
+        if not ((0 <= (x) < 8) and (0 <= (x) < 8)):
             print(f'{(x,y)} outside_the_chessboard')
             return False
         else:
