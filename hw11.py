@@ -10,7 +10,7 @@ class Empioyee:
         return 'I come to the office'
 
     def __gt__(self, other):
-        return int(self.salary_for_day) > other.salary_for_day
+        return self.salary_for_day > other.salary_for_day
 
     def __lt__(self, other):
         return self.salary_for_day < other.salary_for_day
