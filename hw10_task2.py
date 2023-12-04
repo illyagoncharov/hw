@@ -9,12 +9,8 @@ class Chessman:
         return self.color
 
     def _inside_the_chessboard(self, x:int,y:int):# перевіряє чи клітина в межах дошки
-        if not ((0 <= (x) < 8) and (0 <= (x) < 8)):
-            print(f'{(x,y)} outside_the_chessboard')
-            return False
-        else:
-            return True
-
+        return 0 <= x < 8 and 0 <= y < 8
+       
     def change_place(self, x:int, y:int):# змінюємо початкову позицію фігури
         if self._inside_the_chessboard(x, y):
             self.place_on_the_board = (x,y)
