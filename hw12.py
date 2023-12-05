@@ -1,12 +1,14 @@
 from datetime import date
 #--------------------------------------------
+
+
 class Employee:
 
     def __init__(self, name, salary_for_day):
         self.name = name
         self.salary_for_day = salary_for_day
 
-    def __count_work_day():
+    def __count_work_day(self):
         day = date.today().day
         week_day = date.today().isoweekday()
         res = []
@@ -27,8 +29,9 @@ class Employee:
 
         return len(res) - k
 
-
-    def check_salary(self, days = __count_work_day()):
+    def check_salary(self, days = None):
+        if days is None:
+            days = self.__count_work_day()
         return self.salary_for_day * days
 
     def __str__(self):
@@ -56,12 +59,14 @@ class Employee:
         return self.salary_for_day != other.salary_for_day
 #-------------------------------------
 
+
 class Recruiter(Employee):
 
     def work(self):
         return f'{super().work()} and start to hiring.'
-
 #---------------------------------------
+
+
 class Developer(Employee):
 
     def __init__(self, name, salary_for_day, tech_stack):
@@ -103,11 +108,8 @@ class Developer(Employee):
         return super().__gt__(other)
 
     def __add__(self, other):
-        new_tech_stack = self.tech_stack.copy()
-        new_tech_stack.extend(other.tech_stack)
-        new_tech_stack = list(set(new_tech_stack))
+        new_tech_stack = list(set(self.tech_stack+other.tech_stack))
         return Developer(self.name + '' + other.name, max(self.salary_for_day, other.salary_for_day), new_tech_stack)
-
 #-------------------------------------------------------
 
 tech_stack_1 = ['Algorithms', 'Git', 'Database', 'SQL', 'Aggregation functions', 'Recursion', 'Docker']
