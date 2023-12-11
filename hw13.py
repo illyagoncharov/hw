@@ -1,5 +1,6 @@
 from datetime import datetime
 from datetime import date
+from myerrorsfile import EmailAlreadyExistsExeption
 import sys
 
 
@@ -7,10 +8,10 @@ class Employee:
 
     email = ''
 
-    def __init__(self, name, salary_for_day):
+    def __init__(self, name, salary_for_day, email):
         self.name = name
         self.salary_for_day = salary_for_day
-        self.save_email()
+        self.save_email(email)
 
     def __str__(self):
         return f'{self.__class__.__name__} : {self.name}'
@@ -40,21 +41,24 @@ class Employee:
                 raise EmailAlreadyExistsExeption(f'{email} already exists')
             return self
 
-    def save_email(self):
-        email = input(f"Enter email for {self.name} - ")
-        with open('emails.csv', "a") as file_for_email:
+    def save_email(self, email):
             try:
                 self.validate(email)
-            except EmailAlreadyExistsExeption:
-                print(EmailAlreadyExistsExeption)
-                print(f'EmailAlreadyExistsExeption: {email} already exists. Mail will not be added')
-                with open('logs.txt', "a") as logs_file:
-                    t_now = datetime.now()
-                    dt_string = t_now.strftime("%d/%m/%Y %H:%M:%S")
-                    logs_file.write(f'{dt_string} | {sys.exc_info()}\n')
+            except EmailAlreadyExistsExeption as error:
+                self.write_log(error)
             else:
                 self.email = email
-                file_for_email.write(" " + self.email + "\n")
+                self.write_email()
+
+    def write_log(self, error):
+        with open('logs.txt', "a") as logs_file:
+            t_now = datetime.now()
+            dt_string = t_now.strftime("%d/%m/%Y %H:%M:%S")
+            logs_file.write(f'{dt_string} | {sys.exc_info()}\n')
+
+    def write_email(self):
+        with open('emails.csv', "a") as file_for_email:
+            file_for_email.write(" " + self.email + "\n")
 
     def __count_work_day(self):
         day = date.today().day
@@ -144,10 +148,5 @@ tech_stack_1 = ['Algorithms', 'Git', 'Database', 'SQL', 'Aggregation functions',
 
 tech_stack_2 = ['Algorithms', 'Git', 'Database', 'Aggregation functions', 'Docker', "JS"]
 
-d1 = Developer('Alex', 100, tech_stack_1)
-d2 = Developer('Jack', 120, tech_stack_2)
-r = Recruiter('Bohdan', 150)
-
-d3 = d1 + d2 # new object class Developer
-
-print(d1.email)
+d1 = Developer('Alex', 100, tech_stack_1, 'd3@mail.com')
+d2 = Developer('Jack', 120, tech_stack_2, 'd2@mail.com
