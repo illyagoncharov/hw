@@ -1,6 +1,6 @@
 from datetime import datetime
 from datetime import date
-from myerrorsfile import EmailAlreadyExistsExeption
+from myerrorsfile import EmailAlreadyExistsException
 import sys
 
 
@@ -139,9 +139,6 @@ class Developer(Employee):
     def work(self):
         return f'{super().work()} and start to coding.'
 
-
-class EmailAlreadyExistsExeption(Exception):
-    pass
 
 
 tech_stack_1 = ['Algorithms', 'Git', 'Database', 'SQL', 'Aggregation functions', 'Recursion', 'Docker']
