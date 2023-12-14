@@ -60,8 +60,8 @@ class Candidate:
     @staticmethod
     def create_candidates_list(data_with_candidates):
         candidates = []
-        candidate = {}
         for pow in data_with_candidates:
+            candidate = {}
             candidate['first_name'] = pow['Full Name'].split()[Constans.FIRST_NAME_INDEX]
             candidate['last_name'] = pow['Full Name'].split()[Constans.LAST_NAME_INDEX]
             candidate['email'] = pow['Email']
@@ -69,7 +69,6 @@ class Candidate:
             candidate['main_skill'] = pow['Main Skill']
             candidate['main_skill_grade'] = pow['Main Skill Grade']
             candidates.append(candidate)
-            candidate = candidate.copy()
         return candidates
 
 
