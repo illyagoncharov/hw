@@ -1,5 +1,6 @@
 from unittest import TestCase
 from hw14 import Candidate
+from unittest.mock import patch
 
 class CandidateTest(TestCase):
 
@@ -53,3 +54,11 @@ class CandidateTest(TestCase):
                      'main_skill': 'Python',
                      'main_skill_grade': 'Junior'}]
         self.assertEqual(res_data, Candidate.create_candidates_list(self.file_list))
+
+    @patch('hw14.Candidate.read_the_file')
+    def test_generate_candidates(self, mock_read_the_file):
+        adress = 'candidates.csv'
+        mock_read_the_file.return_value = self.file_list
+        result = list(map(str, Candidate.generate_candidates(adress)))
+        expected_result = ['Ivan Chechov', 'Max Payne', 'Tom Hanks']
+        self.assertEqual(expected_result, result)
