@@ -18,22 +18,22 @@ class EmployeeTest(TestCase):
         self.assertEqual("g@gmail.com", self.employee1.validate(correct_email))
 
     def test___gt__(self):
-        self.assertTrue(self.employee1.salary_for_day > self.employee2.salary_for_day)
+        self.assertTrue(self.employee1 > self.employee2)
 
     def test___lt__(self):
-        self.assertFalse(self.employee1.salary_for_day < self.employee2.salary_for_day)
+        self.assertFalse(self.employee1 < self.employee2)
 
     def test___ge__(self):
-        self.assertTrue(self.employee1.salary_for_day >= self.employee2.salary_for_day)
+        self.assertTrue(self.employee1 >= self.employee2)
 
     def test___le__(self):
-        self.assertFalse(self.employee1.salary_for_day <= self.employee2.salary_for_day)
+        self.assertFalse(self.employee1 <= self.employee2)
 
     def test___eq__(self):
-        self.assertFalse(self.employee1.salary_for_day == self.employee2.salary_for_day)
+        self.assertFalse(self.employee1 == self.employee2)
 
     def test___ne__(self):
-        self.assertTrue(self.employee1.salary_for_day != self.employee2.salary_for_day)
+        self.assertTrue(self.employee1 != self.employee2)
 
 
 
