@@ -28,9 +28,10 @@ class Logger():
 def logger(func):
     def wrapper(*args, **kwargs):
         try:
-            func(*args, **kwargs)
+            return func(*args, **kwargs)
         except Exception as exc:
             Logger().write(exc)
+            raise exc
     return wrapper
 
 
